@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday 🎉</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .hidden {
+      display: none;
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: 2.5em;
+      color: #ff66cc;
+    }
+    h2 {
+      margin-top: 40px;
+      color: #ffccff;
+    }
+    .gallery, .videos {
+      margin: 40px auto;
+      display: grid;
+      gap: 15px;
+      max-width: 90%;
+    }
+    .gallery {
+      grid-template-columns: repeat(5, 1fr); /* 5 photos per row */
+    }
+    .videos {
+      grid-template-columns: repeat(3, 1fr); /* 3 videos side by side */
+    }
+    .gallery img, .videos video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff66cc;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover, .videos video:hover {
+      transform: scale(1.05);
+    }
+    .reveal-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: black;
+    }
+    .reveal-button {
+      padding: 20px 40px;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 12px;
+      background-color: #ff66cc;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff66cc;
+      transition: transform 0.2s;
+    }
+    .reveal-button:hover {
+      transform: scale(1.1);
+    }
+    .music-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff66cc;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff66cc;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Step 1: Hidden "reveal" button screen -->
+  <div id="revealScreen" class="reveal-container">
+    <button class="reveal-button" onclick="revealSite()">Click Me 🎁</button>
+  </div>
+
+  <!-- Step 2: Actual website (hidden at first) -->
+  <div id="mainSite" class="hidden">
+    <h1>Happy Birthday 🎂</h1>
+    <p>Here are some memories we’ve shared 💖</p>
+
+    <!-- Photo Gallery -->
+    <h2>📸 2 harami</h2>
+    <div class="gallery">
+      <img src="pic1.jpg" alt="memory">
+      <img src="pic2.jpg" alt="memory">
+      <img src="pic3.jpg" alt="memory">
+      <img src="pic4.jpg" alt="memory">
+      <img src="pic5.jpg" alt="memory">
+      <img src="pic6.jpg" alt="memory">
+      <img src="pic7.jpg" alt="memory">
+      <img src="pic8.jpg" alt="memory">
+      <img src="pic9.jpg" alt="memory">
+      <img src="pic10.jpg" alt="memory">
+    </div>
+
+    <!-- Video Section -->
+    <h2>🎥 haramipana</h2>
+    <div class="videos">
+      <video src="video1.mp4" controls></video>
+      <video src="video2.mp4" controls></video>
+      <video src="video3.mp4" controls></video>
+    </div>
+
+    <!-- Music toggle button -->
+    <button class="music-toggle" onclick="toggleMusic()">🔊</button>
+  </div>
+
+  <script>
+    const music = document.getElementById("bg-music");
+    const toggleBtn = document.querySelector(".music-toggle");
+
+    function revealSite() {
+      document.getElementById("revealScreen").style.display = "none";
+      document.getElementById("mainSite").classList.remove("hidden");
+      music.play().catch(() => {
+        console.log("Autoplay blocked, user must press button.");
+      });
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "🔊";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "🔇";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
